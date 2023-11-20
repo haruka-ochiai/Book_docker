@@ -18,12 +18,16 @@ class S3Controller extends Controller
         );
 
         // S3へファイルをアップロード
-        $result = Storage::disk('s3')->put('/', $request->file('file'));
+        $filePath = $request->file('file')->store('/', 's3');
 
         // アップロードの成功判定
-        if ($result) {
-            return 'アップロード成功';
-        }else {
+        if ($filePath) {
+            // S3上のファイルのURLを取得
+            $url = Storage::disk('s3')->url($filePath);
+
+            // ビューにファイルのURLを渡して表示
+            return view('s3.show', ['url' => $url]);
+        } else {
             return 'アップロード失敗';
         }
     }
