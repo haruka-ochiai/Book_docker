@@ -24,15 +24,11 @@
                 @if(isset($posts))
                 @foreach ($posts as $post)
                 <tr>
-                  @if($post->image)
+                  
                       <td class="text-center align-middle">
                         <img src="{{ $url }}" alt="Uploaded Image">
                       </td>
-                    @else
-                      <td class="text-center align-middle">
-                        <img src="images/no-image.png" alt="images" width="80" height="80">
-                      </td>                   
-                    @endif
+                    
                   <td class="text-center align-middle"><a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a></td>
                   <td>{{ $post->body }}</td>
                 </tr>

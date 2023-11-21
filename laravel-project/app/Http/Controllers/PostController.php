@@ -37,6 +37,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        
         if ($request->hasFile('file')) {
             // S3へファイルをアップロード
             $filePath = $request->file('file')->store('/', 's3');
@@ -44,13 +45,18 @@ class PostController extends Controller
             if ($filePath) {
                 // S3上のファイルのURLを取得
                 $url = Storage::disk('s3')->url($filePath);
+                return view('posts.index', ['url' => $url]);
 
                 $post = Post::create([
                     'title' => $request->title,
                     'body' => $request->body,
                     'image' => $url,
                 ]);
-                return redirect()->route('posts.index', ['url' => $url]);
+
+                $postId = $post->id;
+                
+
+                return redirect()->route('posts.index', ['id' => $postId]);
             } else {
                 return back()->withInput()->withErrors(['file' => 'ファイルのアップロードに失敗しました。']);
             }
@@ -59,9 +65,10 @@ class PostController extends Controller
                 'title' => $request->title,
                 'body' => $request->body,
             ]);
+            $postId = $post->id;
 
        
-        return redirect()->route('posts.index');
+            return view('posts.index', ['url' => $url]);
         }
     }
 
