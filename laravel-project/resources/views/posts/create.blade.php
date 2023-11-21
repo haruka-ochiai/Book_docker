@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">新規投稿</div>
                 <div class="card-body">
-                    <form action="{{ route('posts.store') }}" method="POST">
+                    <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <label for="title" class="col-md-2 col-form-label text-md-right">タイトル</label>
@@ -20,6 +20,10 @@
                             <div class="col-md-9">
                                 <textarea name="body" id="body" style="resize: none; height: 200px; width: 100%">{{ old('body') }}</textarea>
                             </div>
+                        </div>
+                        <div class="form-group row">
+                            <input type="file" name="file" id="">
+                            <input type="submit" value="アップロード">
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

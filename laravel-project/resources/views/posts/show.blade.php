@@ -12,13 +12,23 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>タイトル</th>
-                  <th>本文</th>
+                  <th style="width: 20%;" class="text-center">画像</th>
+                  <th style="width: 20%;" class="text-center">タイトル</th>
+                  <th style="width: 60%;" class="text-center">感想</th>
                 </tr>
               </thead>
               <tbody>
                 @if(isset($post))
                 <tr>
+                  @if($post->image)
+                    <td class="text-center align-middle">
+                      <img src="{{ $url }}" alt="Uploaded Image">
+                    </td>
+                  @else
+                    <td class="text-center align-middle">
+                      <img src="public/images/no-image.png" alt="images" width="80" height="80">
+                    </td>                   
+                  @endif
                   <td>{{ $post->title }}</a></td>
                   <td>{{ $post->body }}</td>
                 </tr>
