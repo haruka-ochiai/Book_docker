@@ -22,11 +22,11 @@
                 <tr>
                 @if($post->image)
                   <td class="text-center align-middle">
-                    <img src="{{ $url }}" alt="Uploaded Image">
+                    <img src="{{ Storage::disk('s3')->url($post->image) }}" alt="Uploaded Image" width="80px" height="80px">
                   </td>
                 @else
                   <td class="text-center align-middle">
-                    <img src="images/no-image.png" alt="images" width="80" height="80">
+                    <img src="{{ asset('images/no-image.png') }}" alt="No Image" width="80px" height="80px">
                   </td>                   
                 @endif
                   <td>{{ $post->title }}</a></td>

@@ -11,6 +11,14 @@
             <button type="button" class="btn btn-primary mb-3 d-block w-100" onclick="location.href='{{ route('posts.create') }}'">
                 新規投稿
             </button>
+            <form action="{{ route('posts.search') }}" method="get">
+              @csrf
+              <input type="text" class="form-control input-lg" placeholder="Buscar" name="search" value="">
+              <input type="submit" value="検索">
+            </form>
+            @isset($search_result)
+              <h5 class="card-title">{{ $search_result }}</h5>
+            @endisset
           <div class="table-resopnsive">
             <table class="table table-striped">
               <thead>
@@ -25,9 +33,9 @@
                   <tr>
                       <td class="text-center align-middle">
                           @if($post->image)
-                              <img src="{{ Storage::disk('s3')->url($post->image) }}" alt="Uploaded Image">
+                              <img src="{{ Storage::disk('s3')->url($post->image) }}" alt="Uploaded Image" width="80px" height="80px">
                           @else
-                              <img src="images/no-image.png" alt="No Image" width="80" height="80">
+                            <img src="{{ asset('images/no-image.png') }}" alt="No Image" width="80px" height="80px">
                           @endif
                       </td>
                       <td class="text-center align-middle">
