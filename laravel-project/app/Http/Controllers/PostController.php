@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
@@ -37,39 +38,24 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $postData = [
+            'title' => $request->title,
+            'body' => $request->body,
+        ];
+
         if ($request->hasFile('file')) {
-            // S3へファイルをアップロード
             $filePath = $request->file('file')->store('/', 's3');
-
             if ($filePath) {
-                // S3上のファイルのURLを取得
-                $url = Storage::disk('s3')->url($filePath);
-                return view('posts.index', ['url' => $url]);
-
-                $post = Post::create([
-                    'title' => $request->title,
-                    'body' => $request->body,
-                    'image' => $url,
-                ]);
-
-                $postId = $post->id;
-                
-
-                return redirect()->route('posts.index', ['id' => $postId]);
+                $postData['image'] = $filePath;
             } else {
                 return back()->withInput()->withErrors(['file' => 'ファイルのアップロードに失敗しました。']);
             }
-        } else {
-            $post = Post::create([
-                'title' => $request->title,
-                'body' => $request->body,
-            ]);
-            $postId = $post->id;
-
-       
-            return view('posts.index', ['url' => $url]);
         }
+
+        $post = Post::create($postData);
+        Log::info("Image Path: {$post->image}");
+
+        return redirect()->route('posts.index', ['id' => $post->id]);
     }
 
     /**

@@ -20,15 +20,15 @@
               <tbody>
                 @if(isset($post))
                 <tr>
-                  @if($post->image)
-                    <td class="text-center align-middle">
-                      <img src="{{ $url }}" alt="Uploaded Image">
-                    </td>
-                  @else
-                    <td class="text-center align-middle">
-                      <img src="public/images/no-image.png" alt="images" width="80" height="80">
-                    </td>                   
-                  @endif
+                @if($post->image)
+                  <td class="text-center align-middle">
+                    <img src="{{ $url }}" alt="Uploaded Image">
+                  </td>
+                @else
+                  <td class="text-center align-middle">
+                    <img src="images/no-image.png" alt="images" width="80" height="80">
+                  </td>                   
+                @endif
                   <td>{{ $post->title }}</a></td>
                   <td>{{ $post->body }}</td>
                 </tr>

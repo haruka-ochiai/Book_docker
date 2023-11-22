@@ -21,20 +21,23 @@
                 </tr>
               </thead>
               <tbody>
-                @if(isset($posts))
-                @foreach ($posts as $post)
-                <tr>
-                  
+              @foreach ($posts as $post)
+                  <tr>
                       <td class="text-center align-middle">
-                        <img src="{{ $url }}" alt="Uploaded Image">
+                          @if($post->image)
+                              <img src="{{ Storage::disk('s3')->url($post->image) }}" alt="Uploaded Image">
+                          @else
+                              <img src="images/no-image.png" alt="No Image" width="80" height="80">
+                          @endif
                       </td>
-                    
-                  <td class="text-center align-middle"><a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a></td>
-                  <td>{{ $post->body }}</td>
-                </tr>
-                @endforeach
-                @endif
-              </tbody>
+                      <td class="text-center align-middle">
+                          <a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a>
+                      </td>
+                      <td>{{ $post->body }}</td>
+                  </tr>
+              @endforeach
+          </tbody>
+
             </table>
           </div>
         </div>

@@ -22,8 +22,10 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <input type="file" name="file" id="">
-                            <input type="submit" value="アップロード">
+                            <label for="image" class="col-md-2 col-form-label text-md-right">画像</label>
+                            <div class="col-md-9">
+                                <input type="file" name="file" id="">
+                            </div>
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
