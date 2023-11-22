@@ -29,8 +29,8 @@
                     <img src="{{ asset('images/no-image.png') }}" alt="No Image" width="80px" height="80px">
                   </td>                   
                 @endif
-                  <td>{{ $post->title }}</a></td>
-                  <td>{{ $post->body }}</td>
+                  <td class="text-center align-middle">{{ $post->title }}</a></td>
+                  <td class="text-center align-middle">{{ $post->body }}</td>
                 </tr>
                 @endif
               </tbody>

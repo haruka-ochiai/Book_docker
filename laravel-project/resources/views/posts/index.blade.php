@@ -41,7 +41,7 @@
                       <td class="text-center align-middle">
                           <a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a>
                       </td>
-                      <td>{{ $post->body }}</td>
+                      <td class="text-center align-middle">{{ $post->body }}</td>
                   </tr>
               @endforeach
           </tbody>
