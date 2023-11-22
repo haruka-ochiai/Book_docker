@@ -15,20 +15,29 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>タイトル</th>
-                  <th>本文</th>
+                  <th style="width: 20%;" class="text-center">画像</th>
+                  <th style="width: 20%;" class="text-center">タイトル</th>
+                  <th style="width: 60%;" class="text-center">感想</th>
                 </tr>
               </thead>
               <tbody>
-                @if(isset($posts))
-                @foreach ($posts as $post)
-                <tr>
-                  <td><a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a></td>
-                  <td>{{ $post->body }}</td>
-                </tr>
-                @endforeach
-                @endif
-              </tbody>
+              @foreach ($posts as $post)
+                  <tr>
+                      <td class="text-center align-middle">
+                          @if($post->image)
+                              <img src="{{ Storage::disk('s3')->url($post->image) }}" alt="Uploaded Image">
+                          @else
+                              <img src="images/no-image.png" alt="No Image" width="80" height="80">
+                          @endif
+                      </td>
+                      <td class="text-center align-middle">
+                          <a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a>
+                      </td>
+                      <td>{{ $post->body }}</td>
+                  </tr>
+              @endforeach
+          </tbody>
+
             </table>
           </div>
         </div>

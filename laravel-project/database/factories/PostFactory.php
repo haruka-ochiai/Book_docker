@@ -9,6 +9,7 @@ $factory->define(Post::class, function (Faker $faker) {
     return [
         'title' => $faker->word,
         'body' => $faker->realText,
+        'image' => 'images/no-image.png',
         'created_at' => now(),
         'updated_at' => now(),
     ];
