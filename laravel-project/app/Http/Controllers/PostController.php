@@ -53,7 +53,6 @@ class PostController extends Controller
         }
 
         $post = Post::create($postData);
-        Log::info("Image Path: {$post->image}");
 
         return redirect()->route('posts.index', ['id' => $post->id]);
     }
@@ -111,7 +110,7 @@ class PostController extends Controller
 
     public function search(Request $request)
     {
-
+        
         $posts = Post::where('title', 'like', "%{$request->search}%")
                 ->orWhere('body', 'like', "%{$request->search}%")
                 ->paginate(15);

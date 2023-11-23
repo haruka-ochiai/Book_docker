@@ -50,15 +50,15 @@
                             @endif
                         @else
                         <div class="search-form form-group">
-                            <form action="{{ route('posts.search') }}" method="get">
-                                @csrf
-                                <div class="input-group">
-                                    <input type="text" class="form-control input-lg" placeholder="入力" name="search" value="">
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-secondary">検索</button>
-                                    </div>
+                        <form action="{{ route('posts.search') }}" method="post">
+                            @csrf
+                            <div class="input-group">
+                                <input type="text" class="form-control input-lg" placeholder="入力" name="search" value="">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-secondary">検索</button>
                                 </div>
-                            </form>
+                            </div>
+                        </form>
                         </div>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
