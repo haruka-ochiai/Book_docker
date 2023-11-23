@@ -3,10 +3,9 @@
 @section('content')
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-12">
+    <div class="col-md-8">
       <div class="card">
         <div class="card-header">記事詳細</div>
-
         <div class="card-body">
           <div class="table-resopnsive">
             <table class="table table-striped">
@@ -22,15 +21,15 @@
                 <tr>
                 @if($post->image)
                   <td class="text-center align-middle">
-                    <img src="{{ $url }}" alt="Uploaded Image">
+                    <img src="{{ Storage::disk('s3')->url($post->image) }}" alt="Uploaded Image" width="80px" height="80px">
                   </td>
                 @else
                   <td class="text-center align-middle">
-                    <img src="images/no-image.png" alt="images" width="80" height="80">
+                    <img src="{{ asset('images/no-image.png') }}" alt="No Image" width="80px" height="80px">
                   </td>                   
                 @endif
-                  <td>{{ $post->title }}</a></td>
-                  <td>{{ $post->body }}</td>
+                  <td class="text-center align-middle">{{ $post->title }}</a></td>
+                  <td class="text-center align-middle">{{ $post->body }}</td>
                 </tr>
                 @endif
               </tbody>

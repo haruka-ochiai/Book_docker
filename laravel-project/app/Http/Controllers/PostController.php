@@ -53,7 +53,6 @@ class PostController extends Controller
         }
 
         $post = Post::create($postData);
-        Log::info("Image Path: {$post->image}");
 
         return redirect()->route('posts.index', ['id' => $post->id]);
     }
@@ -107,5 +106,22 @@ class PostController extends Controller
         $post = Post::find($id);
         $post->delete();
         return redirect()->route('posts.index');
+    }
+
+    public function search(Request $request)
+    {
+        
+        $posts = Post::where('title', 'like', "%{$request->search}%")
+                ->orWhere('body', 'like', "%{$request->search}%")
+                ->paginate(15);
+
+
+        $search_result = $request->search.'の検索結果'.$posts->total().'件';
+
+        return view('posts.index', [
+            'posts' => $posts,
+            'search_result' => $search_result,
+            'search_query'  => $request->search
+        ]);
     }
 }

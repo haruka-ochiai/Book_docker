@@ -3,10 +3,12 @@
 @section('content')
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-12">
+    <div class="col-md-8">
+      @isset($search_result)
+        <h5>{{ $search_result }}</h5>
+      @endisset
       <div class="card">
         <div class="card-header">投稿一覧</div>
-
         <div class="card-body">
             <button type="button" class="btn btn-primary mb-3 d-block w-100" onclick="location.href='{{ route('posts.create') }}'">
                 新規投稿
@@ -25,15 +27,15 @@
                   <tr>
                       <td class="text-center align-middle">
                           @if($post->image)
-                              <img src="{{ Storage::disk('s3')->url($post->image) }}" alt="Uploaded Image">
+                              <img src="{{ Storage::disk('s3')->url($post->image) }}" alt="Uploaded Image" width="80px" height="80px">
                           @else
-                              <img src="images/no-image.png" alt="No Image" width="80" height="80">
+                            <img src="{{ asset('images/no-image.png') }}" alt="No Image" width="80px" height="80px">
                           @endif
                       </td>
                       <td class="text-center align-middle">
                           <a href="{{ route('posts.show', $post->id) }}">{{ $post->title }}</a>
                       </td>
-                      <td>{{ $post->body }}</td>
+                      <td class="text-center align-middle">{{ $post->body }}</td>
                   </tr>
               @endforeach
           </tbody>
