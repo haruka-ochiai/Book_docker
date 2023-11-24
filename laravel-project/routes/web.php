@@ -19,5 +19,3 @@ Auth::routes();
 Route::post('/posts/search', 'PostController@search')->name('posts.search');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('posts', 'PostController');
-Route::view('upload', 'upload');
-Route::post('s3', [\App\Http\Controllers\S3Controller::class, 'uploadS3'])->name('s3');

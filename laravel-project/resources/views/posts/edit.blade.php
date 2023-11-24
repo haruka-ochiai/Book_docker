@@ -7,7 +7,16 @@
             <div class="card">
                 <div class="card-header">編集画面</div>
                 <div class="card-body">
-                    <form action="{{ route('posts.update', $post->id) }}" method="POST">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                    <form action="{{ route('posts.update', $post->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group row">
@@ -20,6 +29,12 @@
                             <label for="body" class="col-md-2 col-form-label text-md-right">感想</label>
                             <div class="col-md-9">
                                 <textarea name="body" id="body" style="resize: none; height: 200px; width: 100%">{{ old('body', $post->body) }}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="image" class="col-md-2 col-form-label text-md-right">画像</label>
+                            <div class="col-md-9">
+                                <input type="file" name="file" id="">
                             </div>
                         </div>
                         <div class="text-center">
