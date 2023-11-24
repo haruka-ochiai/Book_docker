@@ -40,9 +40,7 @@
                 <form style="display:inline" action="{{ route('posts.destroy', $post->id) }}" method="post">
                     @method('DELETE')
                     @csrf
-                    <button type="submit" class="btn btn-danger ml-3">
-                        {{ __('削除') }}
-                    </button>
+                    <input type="submit" value="削除" class="btn btn-danger ml-3" onclick='return confirm("本当に削除しますか？")'>
                 </form>
                 <button type="button" class="btn btn-primary ml-3" onClick="location.href='{{ route('posts.edit', $post->id) }}'">
                     編集

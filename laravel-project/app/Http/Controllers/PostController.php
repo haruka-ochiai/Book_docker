@@ -38,6 +38,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|max:20',
+            'body' => 'required',
+        ]);
+        
+        
         $postData = [
             'title' => $request->title,
             'body' => $request->body,
@@ -90,8 +96,28 @@ class PostController extends Controller
      */
     public function update(Request $request, Int $id)
     {
+        $request->validate([
+            'title' => 'required|max:20',
+            'body' => 'required',
+        ]);
+        
         $post = Post::find($id);
-        $post->fill($request->all())->save();
+
+        $postData = [
+            'title' => $request->title,
+            'body' => $request->body,
+        ];
+
+        if ($request->hasFile('file')) {
+            $filePath = $request->file('file')->store('/', 's3');
+            if ($filePath) {
+                $postData['image'] = $filePath;
+            } else {
+                return back()->withInput()->withErrors(['file' => 'ファイルのアップロードに失敗しました。']);
+            }
+        }
+    
+        $post->update($postData);
         return redirect()->route('posts.index');
     }
 
