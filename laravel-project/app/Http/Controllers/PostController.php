@@ -47,6 +47,7 @@ class PostController extends Controller
         $postData = [
             'title' => $request->title,
             'body' => $request->body,
+            'user_id' => $user_id,
         ];
 
         if ($request->hasFile('file')) {
