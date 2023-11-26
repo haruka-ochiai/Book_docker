@@ -16,7 +16,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('created_at', 'desc')->simplePaginate(8);
         return view('posts.index', compact('posts'));
     }
 
@@ -139,8 +139,8 @@ class PostController extends Controller
         
         $posts = Post::where('title', 'like', "%{$request->search}%")
                 ->orWhere('body', 'like', "%{$request->search}%")
-                ->paginate(15);
-
+                ->orderBy('created_at', 'desc')
+                ->paginate(8);
 
         $search_result = $request->search.'の検索結果'.$posts->total().'件';
 
