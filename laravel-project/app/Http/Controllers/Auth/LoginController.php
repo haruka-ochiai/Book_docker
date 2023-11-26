@@ -43,11 +43,6 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function redirectPath()
-    {
-        return '/posts';
-    }
-
     public function logout(Request $request)
     {
     $this->performLogout($request);
