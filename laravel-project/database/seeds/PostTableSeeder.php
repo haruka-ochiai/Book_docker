@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 class PostTableSeeder extends Seeder
 {
     /**
@@ -11,6 +11,10 @@ class PostTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Post::class, 10)->create();
+        $user = App\User::first();
+
+       factory(App\Models\Post::class, 5)->create([
+            'user_id' => $user->id,
+        ]);
     }
 }
