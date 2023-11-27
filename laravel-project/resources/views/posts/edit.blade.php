@@ -28,7 +28,7 @@
                         <div class="form-group row">
                             <label for="body" class="col-md-2 col-form-label text-md-right">感想</label>
                             <div class="col-md-9">
-                                <textarea name="body" id="body" style="resize: none; height: 200px; width: 100%">{{ old('body', $post->body) }}</textarea>
+                                <textarea name="body" id="body" class="form-control" style="resize: none; height: 200px; width: 100%">{{ old('body', $post->body) }}</textarea>
                             </div>
                         </div>
                         <div class="form-group row">

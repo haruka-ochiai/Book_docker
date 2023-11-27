@@ -39,7 +39,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|max:20',
+            'title' => 'required|max:30',
             'body' => 'required',
         ]);
         
@@ -59,6 +59,7 @@ class PostController extends Controller
         }
 
         $post = Post::create($postData);
+        session()->flash('success', '投稿に成功しました。');
 
         return redirect()->route('posts.index', ['id' => $post->id]);
     }
@@ -118,6 +119,8 @@ class PostController extends Controller
         }
     
         $post->update($postData);
+        session()->flash('success', '投稿内容を変更しました。');
+
         return redirect()->route('posts.index');
     }
 
